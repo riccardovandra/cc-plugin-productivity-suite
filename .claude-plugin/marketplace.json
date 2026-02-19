@@ -1,0 +1,14 @@
+{
+  "name": "riccardovandra",
+  "owner": {
+    "name": "Riccardo Vandra",
+    "url": "https://riccardovandra.com"
+  },
+  "plugins": [
+    {
+      "name": "productivity-suite",
+      "source": "./plugins/productivity-suite",
+      "description": "11 productivity skills: Gmail, Google Drive, Sheets, Docs, Fireflies, ClickUp, Apify, Slack, Model Scout, MD-to-PDF, and Web Fallback."
+    }
+  ]
+}
