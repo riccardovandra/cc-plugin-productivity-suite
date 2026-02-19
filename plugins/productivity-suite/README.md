@@ -1,8 +1,8 @@
 # Claude Code Productivity Suite
 
-**12 skills that turn Claude Code into your connected workspace.**
+**13 skills + 2 commands that turn Claude Code into your connected workspace.**
 
-Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, extract YouTube transcripts, convert markdown to PDF — all by talking to Claude.
+Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, extract YouTube transcripts, analyze videos with AI, convert markdown to PDF — all by talking to Claude.
 
 ---
 
@@ -21,9 +21,17 @@ Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, 
 | **Model Scout** | "What's the best cheap model for summarization?", "Compare Gemini Flash vs Claude Haiku" |
 | **MD to PDF** | "Convert this markdown to a PDF", "Create a professional PDF from this document" |
 | **YouTube Transcript** | "Get the transcript for this video: [URL]", "Extract all transcripts from this channel" |
+| **Video Understanding** | "Analyze this screen recording", "Summarize this YouTube video visually", "Document this process from the recording" |
 | **Web Fallback** | "Fetch this page" (used automatically when standard fetching fails) |
 
 > Gmail, Slack, ClickUp — **read-only by default.** No emails or messages are sent without your explicit approval.
+
+### Commands
+
+| Command | What It Does |
+|---------|-------------|
+| `/checkpoint` | Saves a structured summary of the current session to `workspace/docs/` — pick up exactly where you left off in a new session |
+| `/commit` | Runs `git diff`, auto-generates a commit message, stages everything, commits, and pushes |
 
 ---
 
@@ -34,7 +42,7 @@ Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, 
 /plugin install productivity-suite@riccardovandra
 ```
 
-Done. Restart Claude Code and all 11 skills are available.
+Done. Restart Claude Code and all 13 skills and 2 commands are available.
 
 ---
 
@@ -63,6 +71,7 @@ APIFY_API_KEY=            # console.apify.com/account/integrations
 OPENROUTER_API_KEY=       # openrouter.ai/keys
 SLACK_BOT_TOKEN=          # api.slack.com/apps → OAuth & Permissions (starts with xoxb-)
 SUPADATA_API_KEY=         # supadata.ai — optional fallback for YouTube transcripts
+GEMINI_API_KEY=           # aistudio.google.com/apikey — required for Video Understanding
 ```
 
 **Slack setup note:** You need to create a Slack App with these scopes:
@@ -125,7 +134,7 @@ Just talk to Claude. The skills activate based on what you ask:
 "Convert this markdown to a PDF with the brand style"
 ```
 
-No commands to memorize. No slash commands needed.
+No commands to memorize. Skills activate automatically. For the explicit commands, use `/checkpoint` or `/commit` at any time.
 
 ---
 
