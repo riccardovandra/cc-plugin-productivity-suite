@@ -14,7 +14,7 @@ The Google Drive skill uses the shared Google OAuth integration. If you haven't 
 Quick check — run this to verify your token exists:
 
 ```bash
-uv run ~/.claude/plugins/cache/riccardovandra/productivity-suite/integrations/google/scripts/google_auth.py
+uv run ~/.claude/plugins/cache/riccardovandra/cc-plugin-productivity-suite/integrations/google/scripts/google_auth.py
 ```
 
 ## Step 2: Verify Setup
@@ -23,7 +23,7 @@ Test the connection:
 
 ```bash
 # Test search (read-only, safe to run)
-uv run ~/.claude/plugins/cache/riccardovandra/productivity-suite/skills/google-drive/scripts/search.py --query "name contains '.'" --limit 1
+uv run ~/.claude/plugins/cache/riccardovandra/cc-plugin-productivity-suite/skills/google-drive/scripts/search.py --query "name contains '.'" --limit 1
 ```
 
 

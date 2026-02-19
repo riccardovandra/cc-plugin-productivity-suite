@@ -1,8 +1,8 @@
 # Claude Code Productivity Suite
 
-**11 skills that turn Claude Code into your connected workspace.**
+**12 skills that turn Claude Code into your connected workspace.**
 
-Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, convert markdown to PDF — all by talking to Claude.
+Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, extract YouTube transcripts, convert markdown to PDF — all by talking to Claude.
 
 ---
 
@@ -20,6 +20,7 @@ Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, 
 | **Slack** | "What's happening in #general?", "Draft a message to [channel]" |
 | **Model Scout** | "What's the best cheap model for summarization?", "Compare Gemini Flash vs Claude Haiku" |
 | **MD to PDF** | "Convert this markdown to a PDF", "Create a professional PDF from this document" |
+| **YouTube Transcript** | "Get the transcript for this video: [URL]", "Extract all transcripts from this channel" |
 | **Web Fallback** | "Fetch this page" (used automatically when standard fetching fails) |
 
 > Gmail, Slack, ClickUp — **read-only by default.** No emails or messages are sent without your explicit approval.
@@ -29,7 +30,7 @@ Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, 
 ## Install
 
 ```
-/plugin marketplace add riccardovandra/claude-plugins
+/plugin marketplace add riccardovandra/cc-plugin-productivity-suite
 /plugin install productivity-suite@riccardovandra
 ```
 
@@ -61,6 +62,7 @@ CLICKUP_API_KEY=          # ClickUp → Settings → Apps → API Token (starts 
 APIFY_API_KEY=            # console.apify.com/account/integrations
 OPENROUTER_API_KEY=       # openrouter.ai/keys
 SLACK_BOT_TOKEN=          # api.slack.com/apps → OAuth & Permissions (starts with xoxb-)
+SUPADATA_API_KEY=         # supadata.ai — optional fallback for YouTube transcripts
 ```
 
 **Slack setup note:** You need to create a Slack App with these scopes:
@@ -96,7 +98,7 @@ This unlocks **Gmail, Google Drive, Google Sheets, and Google Docs** in a single
 **Part B: Authorize**
 
 ```bash
-uv run ~/.claude/plugins/cache/riccardovandra/productivity-suite/integrations/google/scripts/oauth_setup.py
+uv run ~/.claude/plugins/cache/riccardovandra/cc-plugin-productivity-suite/integrations/google/scripts/oauth_setup.py
 ```
 
 A browser window opens. Sign in with your Google account. Done.
@@ -104,7 +106,7 @@ A browser window opens. Sign in with your Google account. Done.
 **Verify it worked:**
 
 ```bash
-uv run ~/.claude/plugins/cache/riccardovandra/productivity-suite/integrations/google/scripts/oauth_setup.py --status
+uv run ~/.claude/plugins/cache/riccardovandra/cc-plugin-productivity-suite/integrations/google/scripts/oauth_setup.py --status
 ```
 
 You should see your authorized scopes listed.

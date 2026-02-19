@@ -32,7 +32,7 @@ uv run scripts/update.py changes.md --doc-id "1abc123..."
 This skill uses the shared Google OAuth integration:
 
 ```bash
-uv run ~/.claude/plugins/cache/riccardovandra/productivity-suite/integrations/google/scripts/oauth_setup.py --add-scope documents --add-scope drive
+uv run ~/.claude/plugins/cache/riccardovandra/cc-plugin-productivity-suite/integrations/google/scripts/oauth_setup.py --add-scope documents --add-scope drive
 ```
 
 See the plugin README for full setup instructions.

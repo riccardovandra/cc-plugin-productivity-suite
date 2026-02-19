@@ -73,7 +73,7 @@ Google OAuth setup is done once via the plugin README — it covers Drive automa
 If Drive access is missing, add the scope:
 
 ```bash
-uv run ~/.claude/plugins/cache/riccardovandra/productivity-suite/integrations/google/scripts/oauth_setup.py --add-scope drive
+uv run ~/.claude/plugins/cache/riccardovandra/cc-plugin-productivity-suite/integrations/google/scripts/oauth_setup.py --add-scope drive
 ```
 
 ## Module

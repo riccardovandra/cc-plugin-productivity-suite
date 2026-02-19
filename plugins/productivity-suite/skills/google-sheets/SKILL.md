@@ -191,7 +191,7 @@ uv run scripts/sheets.py --id "SPREADSHEET_ID" --delete "OldSheet" --force
 This skill uses the shared Google OAuth integration:
 
 ```bash
-uv run ~/.claude/plugins/cache/riccardovandra/productivity-suite/integrations/google/scripts/oauth_setup.py --add-scope spreadsheets --add-scope drive
+uv run ~/.claude/plugins/cache/riccardovandra/cc-plugin-productivity-suite/integrations/google/scripts/oauth_setup.py --add-scope spreadsheets --add-scope drive
 ```
 
 See the plugin README for full setup instructions.
