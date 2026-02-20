@@ -8,7 +8,72 @@
     {
       "name": "productivity-suite",
       "source": "./plugins/productivity-suite",
-      "description": "11 productivity skills: Gmail, Google Drive, Sheets, Docs, Fireflies, ClickUp, Apify, Slack, Model Scout, MD-to-PDF, and Web Fallback."
+      "description": "Full bundle: 13 productivity skills — Gmail, Google Drive, Sheets, Docs, Fireflies, ClickUp, Apify, Slack, Model Scout, MD-to-PDF, YouTube Transcript, Video Understanding, and Web Fallback. Plus 2 commands: /checkpoint and /commit."
+    },
+    {
+      "name": "gmail",
+      "source": "./plugins/productivity-suite/skills/gmail",
+      "description": "Read, search, sort, and draft emails in Gmail. No emails are sent without explicit approval."
+    },
+    {
+      "name": "google-drive",
+      "source": "./plugins/productivity-suite/skills/google-drive",
+      "description": "Upload files, search documents, and create folders in Google Drive."
+    },
+    {
+      "name": "google-sheets",
+      "source": "./plugins/productivity-suite/skills/google-sheets",
+      "description": "Create spreadsheets, update rows, and append data in Google Sheets."
+    },
+    {
+      "name": "google-docs",
+      "source": "./plugins/productivity-suite/skills/google-docs",
+      "description": "Create and update Google Docs from markdown files."
+    },
+    {
+      "name": "fireflies",
+      "source": "./plugins/productivity-suite/skills/fireflies",
+      "description": "Retrieve and search meeting transcripts from Fireflies.ai."
+    },
+    {
+      "name": "clickup",
+      "source": "./plugins/productivity-suite/skills/clickup",
+      "description": "Browse ClickUp tasks, update statuses, and read comments."
+    },
+    {
+      "name": "apify",
+      "source": "./plugins/productivity-suite/skills/apify",
+      "description": "Dynamic web scraping and data extraction via Apify actors."
+    },
+    {
+      "name": "slack",
+      "source": "./plugins/productivity-suite/skills/slack",
+      "description": "Read Slack channels and draft messages (read-only by default, no messages sent)."
+    },
+    {
+      "name": "model-scout",
+      "source": "./plugins/productivity-suite/skills/model-scout",
+      "description": "Discover and compare AI models from OpenRouter by cost, speed, and capability."
+    },
+    {
+      "name": "md-to-pdf",
+      "source": "./plugins/productivity-suite/skills/md-to-pdf",
+      "description": "Convert markdown files to clean, professional PDFs."
+    },
+    {
+      "name": "youtube-transcript",
+      "source": "./plugins/productivity-suite/skills/youtube-transcript",
+      "description": "Extract transcripts from YouTube videos or entire channels."
+    },
+    {
+      "name": "video-understanding",
+      "source": "./plugins/productivity-suite/skills/video-understanding",
+      "description": "Analyze videos using Gemini's native video understanding — summarize, document processes, extract insights."
+    },
+    {
+      "name": "web-fallback",
+      "source": "./plugins/productivity-suite/skills/web-fallback",
+      "description": "Alternative web fetching via Jina Reader when standard fetching fails."
     }
   ]
 }

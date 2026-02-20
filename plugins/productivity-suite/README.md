@@ -37,16 +37,43 @@ Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, 
 
 ## Install
 
+### Claude Code CLI (Terminal)
+
+Install everything at once:
+
 ```
 /plugin marketplace add riccardovandra/cc-plugin-productivity-suite
 /plugin install productivity-suite@riccardovandra
 ```
 
-Done. Restart Claude Code and all 13 skills and 2 commands are available.
+Or pick only the skills you need:
+
+```
+/plugin marketplace add riccardovandra/cc-plugin-productivity-suite
+/plugin install gmail@riccardovandra
+/plugin install slack@riccardovandra
+/plugin install clickup@riccardovandra
+```
+
+Restart Claude Code after installing. Skills are automatically available.
+
+### VS Code Extension
+
+The `/plugin` command is **not available** in the VS Code extension. Use the guided setup instead:
+
+1. Download [SETUP.md](SETUP.md) from this repo
+2. Add it to your project folder (or anywhere Claude can see it)
+3. Open Claude Code in VS Code and say:
+
+   > *"I want to set up the Claude Code Productivity Suite. Please open SETUP.md and guide me through the installation step by step."*
+
+Claude will walk you through every step: copying skill files, setting API keys, and configuring Google OAuth.
 
 ---
 
 ## Setup
+
+> **Prefer a guided walkthrough?** See [SETUP.md](SETUP.md) — a step-by-step guide you can hand to Claude and it will configure everything for you.
 
 ### Step 0 — Install UV (if you haven't already)
 
@@ -55,6 +82,8 @@ All scripts run via [UV](https://astral.sh/uv), a fast Python runtime. Install i
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
+Then restart your terminal so the `uv` command is available.
 
 ---
 
