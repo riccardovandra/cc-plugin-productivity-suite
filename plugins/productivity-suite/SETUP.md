@@ -55,7 +55,7 @@ Then restart Claude Code.
 
 1. Type `/plugins` in the Claude chat
 2. Go to **Marketplace**
-3. Add this link: `https://github.com/riccardovandra/cc-plugin-productivity-suite/`
+3. Add this link: `https://github.com/riccardovandra/cc-plugin-productivity-suite`
 4. Select the plugins you want to install
 5. Restart VS Code.
 
