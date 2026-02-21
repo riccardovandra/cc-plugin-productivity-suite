@@ -53,31 +53,10 @@ Then restart Claude Code.
 
 ### If you're using the VS Code extension:
 
-The `/plugin` command isn't available in VS Code. Instead:
-
-1. Clone or download this repository:
-   ```bash
-   git clone https://github.com/riccardovandra/cc-plugin-productivity-suite.git ~/Downloads/productivity-suite
-   ```
-
-2. Copy the skills folder to your Claude config:
-   ```bash
-   mkdir -p ~/.claude/skills
-   cp -r ~/Downloads/productivity-suite/plugins/productivity-suite/skills/* ~/.claude/skills/
-   ```
-
-3. Copy the commands:
-   ```bash
-   mkdir -p ~/.claude/commands
-   cp -r ~/Downloads/productivity-suite/plugins/productivity-suite/commands/* ~/.claude/commands/
-   ```
-
-4. Copy the Google integration (needed for Gmail, Drive, Sheets, Docs):
-   ```bash
-   mkdir -p ~/.claude/integrations/google
-   cp -r ~/Downloads/productivity-suite/plugins/productivity-suite/integrations/google/* ~/.claude/integrations/google/
-   ```
-
+1. Type `/plugins` in the Claude chat
+2. Go to **Marketplace**
+3. Add this link: `https://github.com/riccardovandra/cc-plugin-productivity-suite/`
+4. Select the plugins you want to install
 5. Restart VS Code.
 
 **Verify installation:** Ask Claude: *"What skills do you have available?"* — it should list Gmail, Slack, ClickUp, etc.
