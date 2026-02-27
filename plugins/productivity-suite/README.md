@@ -1,6 +1,6 @@
 # Claude Code Productivity Suite
 
-**13 skills + 2 commands that turn Claude Code into your connected workspace.**
+**14 skills + 2 commands that turn Claude Code into your connected workspace.**
 
 Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, extract YouTube transcripts, analyze videos with AI, convert markdown to PDF — all by talking to Claude.
 
@@ -22,6 +22,7 @@ Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, 
 | **MD to PDF** | "Convert this markdown to a PDF", "Create a professional PDF from this document" |
 | **YouTube Transcript** | "Get the transcript for this video: [URL]", "Extract all transcripts from this channel" |
 | **Video Understanding** | "Analyze this screen recording", "Summarize this YouTube video visually", "Document this process from the recording" |
+| **Meta Builder** | "Create a new skill for X", "I need a slash command for Y", "Build an agent that does Z" |
 | **Web Fallback** | "Fetch this page" (used automatically when standard fetching fails) |
 
 > Gmail, Slack, ClickUp — **read-only by default.** No emails or messages are sent without your explicit approval.
