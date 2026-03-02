@@ -103,7 +103,7 @@ uv run .claude/skills/apify/scripts/linkedin_jobs.py \
 **Actor:** `karamelo/youtube-transcripts`
 **Pricing:** Pay per result
 
-**Note:** Already integrated in `youtube-transcript` skill.
+**Note:** Already integrated in `video-extract` skill.
 
 ---
 
