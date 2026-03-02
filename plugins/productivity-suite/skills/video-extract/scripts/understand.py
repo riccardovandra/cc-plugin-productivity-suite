@@ -35,8 +35,8 @@ from google import genai
 from google.genai import types
 from google.genai.errors import ClientError
 
-# Load .env from project root (works for both local dev and plugin installs)
-load_dotenv(Path.cwd() / ".env")
+# Load .env from project root
+load_dotenv(Path(__file__).parent.parent.parent.parent.parent / ".env")
 
 
 def is_youtube_url(text: str) -> bool:

@@ -2,7 +2,7 @@
 
 **14 skills + 2 commands that turn Claude Code into your connected workspace.**
 
-Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, extract YouTube transcripts, analyze videos with AI, convert markdown to PDF — all by talking to Claude.
+Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, extract video transcripts, analyze videos with AI, convert and manipulate video files, convert markdown to PDF - all by talking to Claude.
 
 ---
 
@@ -20,8 +20,8 @@ Read emails, pull meeting transcripts, manage tasks, write to Drive and Sheets, 
 | **Slack** | "What's happening in #general?", "Draft a message to [channel]" |
 | **Model Scout** | "What's the best cheap model for summarization?", "Compare Gemini Flash vs Claude Haiku" |
 | **MD to PDF** | "Convert this markdown to a PDF", "Create a professional PDF from this document" |
-| **YouTube Transcript** | "Get the transcript for this video: [URL]", "Extract all transcripts from this channel" |
-| **Video Understanding** | "Analyze this screen recording", "Summarize this YouTube video visually", "Document this process from the recording" |
+| **Video Extract** | "Get the transcript for this video: [URL]", "Extract all transcripts from this channel", "Analyze this screen recording visually" |
+| **Video Tools** | "Convert this video to MP4", "Extract audio from this recording", "Convert to WebM" |
 | **Meta Builder** | "Create a new skill for X", "I need a slash command for Y", "Build an agent that does Z" |
 | **Web Fallback** | "Fetch this page" (used automatically when standard fetching fails) |
 
@@ -101,7 +101,7 @@ APIFY_API_KEY=            # console.apify.com/account/integrations
 OPENROUTER_API_KEY=       # openrouter.ai/keys
 SLACK_BOT_TOKEN=          # api.slack.com/apps → OAuth & Permissions (starts with xoxb-)
 SUPADATA_API_KEY=         # supadata.ai — optional fallback for YouTube transcripts
-GEMINI_API_KEY=           # aistudio.google.com/apikey — required for Video Understanding
+GEMINI_API_KEY=           # aistudio.google.com/apikey — required for Video Extract (understand mode)
 ```
 
 **Slack setup note:** You need to create a Slack App with these scopes:

@@ -37,7 +37,7 @@ from datetime import datetime
 from pathlib import Path
 
 # Import from the main transcript script
-from youtube_transcript import (
+from transcript import (
     fetch_transcript_waterfall,
     format_plain_text,
     format_with_timestamps,

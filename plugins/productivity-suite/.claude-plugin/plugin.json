@@ -1,7 +1,7 @@
 {
   "name": "productivity-suite",
-  "description": "14 productivity skills + 2 commands. Skills: Gmail, Google Drive, Sheets, Docs, Fireflies, ClickUp, Apify, Slack, YouTube Transcript, Video Understanding, Model Scout, MD-to-PDF, Web Fallback, Meta Builder. Commands: /checkpoint, /commit.",
-  "version": "1.2.0",
+  "description": "14 productivity skills + 2 commands. Skills: Gmail, Google Drive, Sheets, Docs, Fireflies, ClickUp, Apify, Slack, Video Extract, Video Tools, Model Scout, MD-to-PDF, Web Fallback, Meta Builder. Commands: /checkpoint, /commit.",
+  "version": "1.3.0",
   "author": {
     "name": "Riccardo Vandra",
     "url": "https://riccardovandra.com"
