@@ -44,6 +44,20 @@ my-plugin/
 
 **Important:** Only `plugin.json` goes in `.claude-plugin/`. All other directories are at plugin root.
 
+### settings.json
+
+A `settings.json` at plugin root provides default plugin settings. Currently only the `agent` key is supported, which activates a plugin agent as the main thread:
+
+```json
+{
+  "agent": "specialist"
+}
+```
+
+### .lsp.json
+
+A `.lsp.json` at plugin root enables language intelligence (LSP server support). This gives Claude Code access to language-aware features like go-to-definition, references, and diagnostics for the configured languages.
+
 ## Format
 
 ### Plugin Manifest (plugin.json)
@@ -234,12 +248,17 @@ Use in:
 
 ### Load Plugin Locally
 
+Use `--plugin-dir` for local development testing without installing:
+
 ```bash
 # Single plugin
 claude --plugin-dir ./my-plugin
 
 # Multiple plugins
 claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two
+
+# Test from anywhere with absolute path
+claude --plugin-dir /path/to/my-plugin
 ```
 
 ### Test Components
@@ -490,6 +509,13 @@ Manually format all files:
 - npx available
 ```
 
+## Plugin Submission
+
+To submit a plugin for public distribution:
+
+- **Claude.ai:** `https://claude.ai/settings/plugins/submit`
+- **Platform:** `https://platform.claude.com/plugins/submit`
+
 ## Debugging
 
 ```bash
@@ -517,4 +543,4 @@ claude --debug
 
 ---
 
-Last updated: 2025-12-21
+Last updated: 2026-03-10

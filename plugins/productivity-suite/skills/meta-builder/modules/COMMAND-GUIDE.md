@@ -1,8 +1,10 @@
 # Creating Slash Commands
 
+> **Commands and skills have been merged.** Both `.claude/commands/` and `.claude/skills/` create `/slash` commands and work identically. Skills take precedence on name conflicts. This guide remains for reference but new capabilities should use the skills format - see [SKILL-GUIDE.md](SKILL-GUIDE.md).
+
 Slash commands are user-invoked prompts triggered explicitly with `/command`.
 
-Last updated: 2025-12-21
+Last updated: 2026-03-10
 
 ## When to Create a Command
 
@@ -94,14 +96,14 @@ Usage: `/search TODO items`
 
 ### Using Positional Arguments
 
-Individual arguments:
+Individual arguments (0-based: `$0` = first arg, `$1` = second):
 ```markdown
 ---
 description: Create a new file with content
 argument-hint: [file-path] [content-type]
 ---
 
-Create a new $2 file at $1
+Create a new $1 file at $0
 ```
 
 Usage: `/create src/utils.ts typescript`

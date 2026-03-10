@@ -2,7 +2,7 @@
 
 Agents (subagents) are specialists that run in isolated context for parallel work.
 
-Last updated: 2026-02-19
+Last updated: 2026-03-10
 
 ## When to Create an Agent
 
@@ -50,6 +50,8 @@ skills: skill1, skill2
 | `model` | No | `inherit`, `sonnet`, `opus`, `haiku` | Model to use |
 | `permissionMode` | No | `default`, `acceptEdits`, `bypassPermissions`, `dontAsk`, `plan` | How to handle permissions |
 | `skills` | No | comma-separated | Skills to auto-load on startup |
+| `isolation` | No | `worktree` | Run in a temporary git worktree. Auto-cleaned if no changes; if changes exist, returns worktree path and branch |
+| `background` | No | `true` | Always run this agent as a background task |
 
 **Advanced Fields** (see [Advanced Features](#advanced-features) section):
 
@@ -99,6 +101,15 @@ Provide:
 
 ## Tool Access
 
+### Subagent Spawning Control
+
+Use `Agent(agent-type)` in the `tools` field to allowlist which subagent types an agent can spawn. `Agent` without parentheses allows all types.
+
+```yaml
+tools: Read, Grep, Glob, Agent(researcher)    # Can only spawn researcher subagents
+tools: Read, Grep, Glob, Agent                # Can spawn any subagent type
+```
+
 ### Common Tool Sets
 
 **Read-only research:**
@@ -132,6 +143,9 @@ Claude Code includes these built-in agents:
 | `general-purpose` | Sonnet | All | Complex multi-step tasks |
 | `plan` | Sonnet | Read, Glob, Grep, Bash | Codebase research in plan mode |
 | `explore` | Haiku | Read-only | Fast codebase searching |
+| `Bash` | - | Bash | Shell command execution |
+| `statusline-setup` | - | - | Status line configuration |
+| `Claude Code Guide` | - | - | Built-in usage guidance |
 
 ## Management
 
@@ -168,13 +182,15 @@ claude --agents '{
 Agents can be resumed to continue previous conversations:
 
 - Each execution gets a unique `agentId`
-- Transcript stored in: `agent-{agentId}.jsonl`
+- Transcript stored at: `~/.claude/projects/{project}/{sessionId}/subagents/agent-{agentId}.jsonl`
 - Resume with: `resume: "abc123"` parameter
 
 **Use cases:**
 - Long-running research
 - Iterative refinement
 - Multi-step workflows
+
+> **Note:** The `Task` tool was renamed to `Agent` in v2.1.63. Older documentation or examples referencing `Task` should use `Agent` instead.
 
 ## Best Practices
 

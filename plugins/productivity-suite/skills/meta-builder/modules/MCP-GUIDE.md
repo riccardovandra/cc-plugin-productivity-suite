@@ -27,6 +27,8 @@ MCP (Model Context Protocol) servers connect Claude Code to external tools, data
 | **User** | `~/.claude.json` | All projects | Personal utilities |
 | **Enterprise** | `managed-mcp.json` | System-wide | Org policy |
 
+**Scope terminology:** In CLI commands, `--scope local` stores in `~/.claude.json` (per-project private). `--scope user` applies across all projects. The `project` scope refers to `.mcp.json` committed to source control.
+
 **Precedence:** Local > Project > User > Enterprise
 
 ## Format
@@ -133,7 +135,18 @@ claude mcp add --transport http sentry https://mcp.sentry.dev/mcp
 # 2. Authenticate in Claude Code
 /mcp
 # Follow browser OAuth flow
+
+# Advanced OAuth flags
+claude mcp add --transport http myservice https://mcp.example.com \
+  --callback-port 8765 \
+  --client-id "your-client-id" \
+  --client-secret "your-client-secret"
 ```
+
+**OAuth configuration options:**
+- `--callback-port` - Specify the local port for OAuth callback
+- `--client-id` / `--client-secret` - Provide OAuth credentials directly
+- `authServerMetadataUrl` - Override OAuth metadata discovery URL in config
 
 ### Bearer Token
 
@@ -148,6 +161,20 @@ claude mcp add --transport http secure-api https://api.example.com/mcp \
 claude mcp add --transport sse private-api https://api.company.com/sse \
   --header "X-API-Key: your-key"
 ```
+
+## MCP Tool Search
+
+When MCP tool descriptions exceed 10% of the context window, tools are loaded on-demand rather than all at once. Claude searches for the right tool based on the task.
+
+Controlled via the `ENABLE_TOOL_SEARCH` environment variable:
+- `auto` (default) - Enable when tool descriptions exceed threshold
+- `auto:N` - Enable when tool count exceeds N
+- `true` - Always enable tool search
+- `false` - Always load all tools upfront
+
+## Claude.ai Sync
+
+MCP servers configured in claude.ai automatically sync to Claude Code when logged in with a claude.ai account. This means servers set up in the web interface are available in the CLI without manual configuration.
 
 ## MCP Features
 
@@ -229,6 +256,8 @@ MAX_MCP_OUTPUT_TOKENS=50000 claude
 ## Enterprise MCP Configuration
 
 ### Option 1: Exclusive Control (managed-mcp.json)
+
+Deployed to system directories, takes exclusive control over MCP server configuration. Users cannot override these servers. Separate from the allowlist/denylist approach.
 
 ```json
 {
@@ -406,4 +435,4 @@ claude --debug
 
 ---
 
-Last updated: 2025-12-21
+Last updated: 2026-03-10

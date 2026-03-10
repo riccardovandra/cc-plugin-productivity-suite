@@ -1,6 +1,6 @@
 # Claude Code Official Reference
 
-Last updated: 2026-02-19
+Last updated: 2026-03-10
 
 This document is an index of all Claude Code primitives. Use the doc-updater agent to refresh content from official documentation.
 

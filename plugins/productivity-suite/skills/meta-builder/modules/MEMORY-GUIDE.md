@@ -26,6 +26,8 @@ Memory provides instructions and context that persist across sessions through CL
 
 ### CLAUDE.md Locations
 
+Both paths are valid and equivalent - use whichever fits your project structure:
+
 ```
 # Project memory (shared with team)
 ./CLAUDE.md                      # Option 1: Project root
@@ -50,7 +52,11 @@ Memory provides instructions and context that persist across sessions through CL
     └── styles.md
 ```
 
-All `.md` files in `.claude/rules/` are automatically loaded.
+All `.md` files in `.claude/rules/` are automatically loaded. Symlinks are supported for sharing rules across projects.
+
+### User-Level Rules
+
+Personal rules at `~/.claude/rules/` are loaded before project rules. Project rules have higher priority and override user-level rules on conflict.
 
 ## Format
 
@@ -154,18 +160,30 @@ Available npm commands: @package.json
         └── security.md
 ```
 
-## User-Level Rules
+## Auto Memory
 
-Create personal rules for all projects:
+Claude Code maintains automatic memory at `~/.claude/projects/<project>/memory/MEMORY.md`. The first 200 lines are loaded into context at session start.
 
-```
-~/.claude/rules/
-├── preferences.md              # Personal coding preferences
-├── workflows.md                # Preferred workflows
-└── shortcuts.md                # Custom shortcuts
-```
+Key details:
+- Storage is git-based, so all worktrees share the same auto memory
+- Subagents can maintain their own auto memory independently
+- Use `/memory` to view or edit
 
-User-level rules load before project rules (project takes precedence).
+## Settings for Memory
+
+### claudeMdExcludes
+
+For monorepos, use `claudeMdExcludes` in settings to skip irrelevant CLAUDE.md files from other teams. Accepts glob patterns matched against absolute file paths.
+
+### Additional Directories
+
+Set `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` environment variable to load CLAUDE.md files from `--add-dir` directories.
+
+## Hooks
+
+### InstructionsLoaded
+
+The `InstructionsLoaded` hook fires when a CLAUDE.md or rules file is loaded. Useful for debugging which memory files are active in a session.
 
 ## Best Practices
 
@@ -176,6 +194,31 @@ User-level rules load before project rules (project takes precedence).
 5. **Use path-specific rules sparingly** - Only when truly necessary
 6. **Organize with subdirectories** - Group related rules
 7. **Use imports for team docs** - Alternative to duplication
+
+## First Principles for Writing CLAUDE.md
+
+Based on empirical research (arxiv:2602.11988 "Evaluating AGENTS.md") and field experience.
+
+**Key finding:** Context files in their common form decrease task success rates and increase inference cost by 20-23%. The primary failure mode is over-instruction.
+
+| Principle | Rule |
+|-----------|------|
+| Minimal requirements | Every instruction costs against a ~150-200 budget (~50 consumed by Claude Code's system prompt). Each rule must justify its slot. |
+| Universal applicability | If a rule doesn't apply to every task in the project, it belongs in a sub-document or path-scoped rule - not root CLAUDE.md. |
+| Never auto-generate | `/init` output is a reference, not a starting point. Manual crafting required - LLM-generated files reduce success rates and increase cost 20-23%. |
+| Progressive disclosure | Root CLAUDE.md under ~300 lines. Domain-specific guidance in `.claude/rules/` or referenced sub-documents. |
+| Pointers over copies | Reference `file:line` instead of inline code snippets. Snippets go stale; file references point to current truth. |
+| Positional priority | Most critical instructions at top and bottom. Instructions buried in the middle get systematically less attention (LLM positional bias). |
+| No code style rules | Delegate to linters/formatters via hooks. Style instructions bloat context and degrade instruction-following performance. |
+| No repository overviews | Agents explore anyway. Overviews add tokens without reducing file discovery steps. |
+| Complexity gates | Universal rules (package manager, file deletion) at root. Domain-specific rules path-scoped or conditional. |
+| No reactive hotfixes | One-off behavioral fixes appended to CLAUDE.md dilute instruction-following for all future sessions. Use targeted sub-documents or hooks instead. |
+
+**Empirical evidence:**
+- Developer-written minimal files: +4% task success
+- LLM-generated files: -0.5 to -2% success, +20-23% inference cost
+- Agents follow instructions reliably - excess instructions cause excess work (extra exploration, testing, traversal)
+- 95-100% of auto-generated files included repository overviews that provided no measurable benefit
 
 ## Memory Commands
 
@@ -238,4 +281,4 @@ paths: src/api/**/*.ts
 
 ---
 
-Last updated: 2025-12-21
+Last updated: 2026-03-10

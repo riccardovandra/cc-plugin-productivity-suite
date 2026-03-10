@@ -28,6 +28,10 @@ Hooks are automated scripts that run in response to specific events in Claude Co
 | **PreCompact** | Before compact operation | No |
 | **SessionStart** | Session starts/resumes | No |
 | **SessionEnd** | Session ends | No |
+| **ConfigChange** | Settings or skills file changes during session | No |
+| **InstructionsLoaded** | CLAUDE.md or rules file loads | No |
+| **WorktreeCreate** | Git worktree is created (replaces default git behavior) | No |
+| **WorktreeRemove** | Git worktree is removed | No |
 | **TeammateIdle** | Agent team teammate goes idle | Yes (experimental) |
 | **TaskCompleted** | Task marked completed | Yes (experimental) |
 
@@ -100,7 +104,7 @@ Hooks are configured in settings files:
 
 ### Agent-Based Hook (multi-turn with tool access)
 
-Use when the hook needs to run tools (e.g. verify tests pass, check lint):
+Use when the hook needs to run tools (e.g. verify tests pass, check lint). Spawns a subagent with full tool access (up to 60 seconds, 50 turns):
 
 ```json
 {
@@ -120,6 +124,11 @@ Use when the hook needs to run tools (e.g. verify tests pass, check lint):
   }
 }
 ```
+
+**Hook types summary:**
+- `type: "command"` - Run a shell command/script
+- `type: "prompt"` - Single LLM call (no tool access)
+- `type: "agent"` - Multi-turn subagent with tool access (up to 60s, 50 turns)
 
 ### Command Hook with Optional Fields
 
@@ -172,6 +181,12 @@ Use when the hook needs to run tools (e.g. verify tests pass, check lint):
 
 ## Matchers
 
+### Configuring Hooks
+
+The `/hooks` interactive menu is the primary way to configure hooks. It provides a guided interface for adding, editing, and removing hooks without manually editing JSON.
+
+## Matchers
+
 For tool-related events (PreToolUse, PermissionRequest, PostToolUse):
 
 | Matcher | Matches |
@@ -189,6 +204,18 @@ For tool-related events (PreToolUse, PermissionRequest, PostToolUse):
 - `WebFetch`, `WebSearch` - Web operations
 - `Glob`, `Grep` - File utilities
 - `mcp__<server>__<tool>` - MCP tools
+
+**SessionStart matchers** (match on `source` field):
+- `startup` - Fresh session start
+- `resume` - Resumed session
+- `clear` - After context clear
+- `compact` - After compaction
+
+**Notification matchers:**
+- `permission_prompt` - Permission dialog shown
+- `idle_prompt` - Idle prompt displayed
+- `auth_success` - Authentication completed
+- `elicitation_dialog` - Elicitation dialog shown
 
 ## Hook Input (via stdin)
 
@@ -213,12 +240,14 @@ Hooks receive JSON via stdin:
 **Event-specific fields:**
 - **PreToolUse/PostToolUse**: `tool_name`, `tool_input`, `tool_use_id`, `tool_response`
 - **UserPromptSubmit**: `prompt`
-- **Stop/SubagentStop**: `stop_hook_active`
+- **Stop/SubagentStop**: `stop_hook_active` (set to `true` when the Stop event was triggered by a hook, preventing infinite hook loops)
 - **PreCompact**: `trigger` ("manual" or "auto"), `custom_instructions`
 - **SessionStart**: `source` ("startup", "resume", "clear", "compact")
 - **SessionEnd**: `reason` ("clear", "logout", "prompt_input_exit", "other")
 
 ## Hook Output
+
+Hooks can output structured JSON by exiting with code 0 and printing JSON to stdout. Key fields: `permissionDecision` (allow/deny/ask) and `hookSpecificOutput` for event-specific data.
 
 ### Exit Codes
 
@@ -502,4 +531,4 @@ Always validate and sanitize inputs from stdin.
 
 ---
 
-Last updated: 2026-02-19
+Last updated: 2026-03-10

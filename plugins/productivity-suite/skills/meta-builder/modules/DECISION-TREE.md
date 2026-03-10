@@ -1,13 +1,15 @@
 # Decision Tree: Choosing the Right Primitive
 
-Last updated: 2025-12-21
+Last updated: 2026-03-10
 
 ## Quick Decision
+
+> **Note:** Commands and skills are now equivalent - both create `/slash` commands. Skills are the recommended format as they support multi-file structure and take precedence on name conflicts.
 
 | You want to... | Use |
 |----------------|-----|
 | Add a complex, reusable capability | **Skill** |
-| Create a quick action triggered with `/` | **Command** |
+| Create a quick action triggered with `/` | **Skill** (or Command) |
 | Run work in parallel / isolated context | **Agent** |
 | Store project instructions / rules | **Memory** |
 | Configure permissions / environment | **Settings** |
@@ -37,11 +39,12 @@ START: What do you want to add?
 │   │   │
 │   │   └─► NO (explicit trigger): "Simple or complex?"
 │   │       │
-│   │       ├─► Simple prompt → COMMAND
+│   │       ├─► Simple prompt → SKILL (single-file)
 │   │       │   Examples: /morning, /eod, /commit
+│   │       │   (Commands path also works but skills are preferred)
 │   │       │
-│   │       └─► Complex workflow → SKILL (+ optional /command wrapper)
-│   │           Create skill, optionally add command to trigger it
+│   │       └─► Complex workflow → SKILL (multi-file)
+│   │           Create skill with modules, scripts as needed
 │
 ├─► "Configuration / Instructions"
 │   │
@@ -85,8 +88,8 @@ START: What do you want to add?
 |----------|--------|--------|
 | Auto-trigger + Same context? | Yes | **Skill** |
 | Auto-trigger + Parallel/isolated? | Yes | **Agent** |
-| Explicit trigger + Simple? | Yes | **Command** |
-| Explicit trigger + Complex? | Yes | **Skill** (+ command) |
+| Explicit trigger + Simple? | Yes | **Skill** (single-file) |
+| Explicit trigger + Complex? | Yes | **Skill** (multi-file) |
 | Project instructions / rules? | Yes | **Memory** |
 | Permissions / env config? | Yes | **Settings** |
 | React to events / tool calls? | Yes | **Hooks** |
@@ -330,13 +333,10 @@ For distributing a complete solution:
 
 ## Anti-Patterns (What NOT to Do)
 
-❌ **Don't use Command for complex workflows**
-- Commands are single-file prompts
-- Use Skill for multi-step processes
-
-❌ **Don't use Skill when Command is enough**
-- If it's just a quick prompt, use Command
-- Skills are for complex, reusable capabilities
+❌ **Don't use Commands for new capabilities**
+- Commands and skills are now equivalent
+- Skills are preferred as they support multi-file structure
+- Commands path still works but skills take precedence on name conflicts
 
 ❌ **Don't put configuration in Skills**
 - Use Memory for instructions
@@ -392,4 +392,4 @@ After:  .claude/settings.json (permissions, env)
 
 ---
 
-Last updated: 2025-12-21
+Last updated: 2026-03-10

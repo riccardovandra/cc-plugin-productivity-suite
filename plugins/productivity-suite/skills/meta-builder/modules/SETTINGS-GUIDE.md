@@ -221,7 +221,14 @@ Control tool access with `allow`, `ask`, or `deny`:
   "model": "claude-sonnet-4-5-20250929",
   "outputStyle": "Explanatory",
   "alwaysThinkingEnabled": true,
+  "autoMemoryEnabled": true,
   "cleanupPeriodDays": 30,
+  "language": "en",
+  "showTurnDuration": true,
+  "spinnerVerbs": ["Thinking", "Analyzing", "Crafting"],
+  "plansDirectory": ".claude/plans",
+  "claudeMdExcludes": ["vendor/CLAUDE.md", "node_modules/**/CLAUDE.md"],
+  "availableModels": ["claude-sonnet-4-5-20250929", "claude-opus-4-20250115"],
   "attribution": {
     "commit": "🤖 Co-authored-by: Claude",
     "pr": "🤖 Generated with Claude Code"
@@ -230,6 +237,54 @@ Control tool access with `allow`, `ask`, or `deny`:
   "forceLoginMethod": "claudeai",
   "forceLoginOrgUUID": "xxxxxxxx-xxxx-..."
 }
+```
+
+**Settings reference:**
+
+| Setting | Purpose |
+|---------|---------|
+| `outputStyle` | Set default output style (name or path) |
+| `availableModels` | Restrict model choices to a specific list |
+| `language` | Override response language (e.g., "en", "it", "ja") |
+| `sandbox` | Filesystem and network sandbox configuration |
+| `alwaysThinkingEnabled` | Force extended thinking on every turn |
+| `autoMemoryEnabled` | Toggle auto memory on/off |
+| `plansDirectory` | Directory where plan files are stored |
+| `enabledPlugins` | Enable or disable specific plugins by name |
+| `extraKnownMarketplaces` | Add custom plugin marketplaces |
+| `showTurnDuration` | Show turn timing in the UI |
+| `spinnerVerbs` | Customize spinner text while Claude works |
+| `claudeMdExcludes` | Skip specific CLAUDE.md files from loading |
+
+### Sandbox Settings
+
+The sandbox restricts what Claude Code can access on the filesystem and network:
+
+```json
+{
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": ["docker", "git"],
+    "allowUnsandboxedCommands": false,
+    "network": {
+      "allowUnixSockets": ["~/.ssh/agent-socket"],
+      "allowLocalBinding": true,
+      "httpProxyPort": 8080,
+      "socksProxyPort": 8081
+    }
+  }
+}
+```
+
+**Sandbox fields:**
+- `enabled` - Turn sandbox on/off
+- `autoAllowBashIfSandboxed` - Auto-approve Bash commands when sandboxed (safe since sandbox restricts access)
+- `excludedCommands` - Commands that bypass the sandbox (use sparingly)
+- `allowUnsandboxedCommands` - Allow commands outside sandbox (defeats purpose if true)
+- `network.allowUnixSockets` - Unix sockets to allow (e.g., SSH agent)
+- `network.allowLocalBinding` - Allow binding to localhost ports
+- `network.httpProxyPort` / `network.socksProxyPort` - Proxy ports for network access control
 ```
 
 ## Best Practices
@@ -343,4 +398,4 @@ Control tool access with `allow`, `ask`, or `deny`:
 
 ---
 
-Last updated: 2025-12-21
+Last updated: 2026-03-10

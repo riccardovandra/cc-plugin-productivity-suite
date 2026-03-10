@@ -207,6 +207,8 @@ In `.claude/settings.local.json`:
 }
 ```
 
+**Note:** Output style changes are saved to `.claude/settings.local.json` (not project settings). This keeps style preferences personal and out of version control.
+
 ## Best Practices
 
 1. **Be specific about behavior**
@@ -362,4 +364,4 @@ Create clear, user-friendly documentation.
 
 ---
 
-Last updated: 2025-12-21
+Last updated: 2026-03-10

@@ -2,7 +2,9 @@
 
 Skills are model-invoked capabilities that Claude auto-discovers based on context.
 
-Last updated: 2026-02-19
+Last updated: 2026-03-10
+
+> **Note: Commands and Skills are now merged.** Both `.claude/commands/` and `.claude/skills/` create `/slash` commands and work identically. Skills take precedence on name conflicts. The commands path still works but skills are the primary path for new capabilities.
 
 ## When to Create a Skill
 
@@ -91,6 +93,26 @@ allowed-tools: Read, Grep, Glob
 - Security-sensitive workflows
 - Limited scope analysis
 
+### Skill Permission Rules
+
+In `settings.json`, you can grant permissions for specific skills:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Skill(my-skill)",
+      "Skill(deploy-*)"
+    ]
+  }
+}
+```
+
+| Pattern | Matches |
+|---------|---------|
+| `Skill(name)` | Exact match, no arguments |
+| `Skill(name *)` | Prefix match with any arguments |
+
 ### Markdown Body
 
 ```markdown
@@ -105,6 +127,29 @@ allowed-tools: Read, Grep, Glob
 ## Scripts
 [List of available scripts with usage]
 ```
+
+## String Substitutions
+
+Use these variables in the markdown body of a skill. They are replaced at invocation time.
+
+| Variable | Description |
+|----------|-------------|
+| `$ARGUMENTS` | All arguments as a single string |
+| `$0`, `$1`, `$2`... | Positional arguments (0-based: `$0` = first arg) |
+| `${CLAUDE_SESSION_ID}` | Current session ID |
+| `${CLAUDE_SKILL_DIR}` | Directory containing this skill's SKILL.md |
+
+**Note:** Positional arguments are 0-based. `$0` is the first argument, `$1` is the second, and so on.
+
+## Monorepo Support
+
+Skills are auto-discovered from nested `.claude/skills/` directories in subdirectories of the project root. This means monorepo packages with their own `.claude/skills/` are picked up automatically.
+
+Skills loaded from `--add-dir` directories get live change detection during a session - edits to those skill files take effect without restarting.
+
+## Context Budget
+
+Skill descriptions consume approximately 2% of the context window (fallback: 16,000 characters). If you have many skills and are hitting limits, you can override this with the `SLASH_COMMAND_TOOL_CHAR_BUDGET` environment variable.
 
 ## Best Practices
 
