@@ -74,7 +74,7 @@ Create or edit a `.env` file in your **project root** (the folder where your CLA
 ```bash
 FIREFLIES_API_KEY=your_key_here
 CLICKUP_API_KEY=your_key_here
-APIFY_API_KEY=your_key_here
+APIFY_TOKEN=your_token_here
 OPENROUTER_API_KEY=your_key_here
 SLACK_BOT_TOKEN=your_token_here
 SUPADATA_API_KEY=your_key_here

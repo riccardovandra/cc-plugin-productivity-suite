@@ -55,10 +55,10 @@ def load_env_file() -> None:
 def get_api_key() -> str:
     """Get Apify API key from environment."""
     load_env_file()
-    key = os.environ.get("APIFY_API_KEY")
+    key = os.environ.get("APIFY_TOKEN") or os.environ.get("APIFY_API_KEY")
     if not key:
-        print("Error: APIFY_API_KEY not found in environment", file=sys.stderr)
-        print("Set it in your .env file or export it", file=sys.stderr)
+        print("Error: APIFY_TOKEN not found in environment", file=sys.stderr)
+        print("Set APIFY_TOKEN in your .env file or export it", file=sys.stderr)
         sys.exit(1)
     return key
 
@@ -73,7 +73,7 @@ async def search_linkedin_jobs(
     job_types: list[str] | None = None,
     max_results: int = 100,
     api_key: str = None,
-    verbose: bool = False
+    verbose: bool = False,
 ) -> list[dict]:
     """
     Search LinkedIn for job postings.
@@ -143,11 +143,14 @@ async def search_linkedin_jobs(
     if job_types:
         input_params["EmploymentTypeFilter"] = job_types
 
-    headers = {"Content-Type": "application/json"}
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
 
     async with aiohttp.ClientSession() as session:
         # Start the actor run
-        run_url = f"{APIFY_API_BASE}/acts/{ACTOR_ID}/runs?token={api_key}"
+        run_url = f"{APIFY_API_BASE}/actors/{ACTOR_ID}/runs"
 
         if verbose:
             print(f"Searching LinkedIn Jobs for: {query}", file=sys.stderr)
@@ -165,7 +168,7 @@ async def search_linkedin_jobs(
                 print(f"Run started: {run_id}", file=sys.stderr)
 
         # Poll for completion
-        status_url = f"{APIFY_API_BASE}/actor-runs/{run_id}?token={api_key}"
+        status_url = f"{APIFY_API_BASE}/actor-runs/{run_id}"
         elapsed = 0
         poll_interval = 5
         timeout_secs = 600
@@ -174,7 +177,7 @@ async def search_linkedin_jobs(
             await asyncio.sleep(poll_interval)
             elapsed += poll_interval
 
-            async with session.get(status_url) as resp:
+            async with session.get(status_url, headers=headers) as resp:
                 status_data = await resp.json()
                 status = status_data["data"]["status"]
 
@@ -185,15 +188,18 @@ async def search_linkedin_jobs(
                     break
                 elif status in ["FAILED", "ABORTED", "TIMED-OUT"]:
                     raise Exception(f"Actor run failed with status: {status}")
-
-        if elapsed >= timeout_secs:
+        else:
             raise Exception(f"Actor run timed out after {timeout_secs}s")
 
         # Fetch results
         dataset_id = status_data["data"]["defaultDatasetId"]
-        dataset_url = f"{APIFY_API_BASE}/datasets/{dataset_id}/items?token={api_key}&format=json"
+        dataset_url = f"{APIFY_API_BASE}/datasets/{dataset_id}/items"
 
-        async with session.get(dataset_url) as resp:
+        async with session.get(
+            dataset_url,
+            headers=headers,
+            params={"format": "json"},
+        ) as resp:
             if resp.status != 200:
                 raise Exception(f"Failed to fetch results: {resp.status}")
 
