@@ -55,6 +55,11 @@ Known, validated actors for common research tasks. See [modules/ACTOR_REGISTRY.m
 | LinkedIn Jobs | fantastic-jobs/advanced-linkedin-job-search-api | vIGxjRrHqDTPuE6M4 | Pay per result |
 | YouTube Transcripts | karamelo/youtube-transcripts | - | Pay per result |
 | People Database | apify/people-database | IoSHqwTR9YGhzccez | Pay per result |
+| Public X content | [xquik/x-tweet-scraper](https://apify.com/xquik/x-tweet-scraper) | wAusCMrm284Voaw86 | Check live listing |
+| Public X audiences | [xquik/x-follower-scraper](https://apify.com/xquik/x-follower-scraper) | AaT0BcKU5GQh97wdt | Check live listing |
+
+For either Xquik Actor, read [modules/XQUIK_ACTORS.md](modules/XQUIK_ACTORS.md).
+Use its bounded-input, approval, hard-cap, and diagnostic workflow.
 
 ---
 
@@ -133,10 +138,11 @@ For Tier 1 EDP data that requires external research:
 ## Environment Variables
 
 ```bash
-APIFY_API_KEY=your_api_key_here
+APIFY_TOKEN=your_token_here
 ```
 
-Get your API key from: https://console.apify.com/account/integrations
+Get your API token from: https://console.apify.com/account/integrations
+`APIFY_API_KEY` remains a compatibility fallback for existing setups.
 
 ---
 

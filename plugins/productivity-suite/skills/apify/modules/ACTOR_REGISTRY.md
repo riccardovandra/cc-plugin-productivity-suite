@@ -1,6 +1,7 @@
 # Apify Actor Registry
 
-Validated actors for common research needs. All actors here have been tested and are known to work well.
+Actors for common research needs.
+Each entry states its verification level.
 
 ---
 
@@ -117,9 +118,24 @@ uv run .claude/skills/apify/scripts/linkedin_jobs.py \
 
 ### Twitter/X Search
 
-**Use Case:** Search tweets by keyword, user, or hashtag
-**Actor ID:** To be added when needed
-**Status:** Not yet validated
+Use the schema-validated Xquik Actors below.
+Read [XQUIK_ACTORS.md](XQUIK_ACTORS.md) before any run.
+
+#### Xquik X Tweet Scraper
+
+**Use Case:** Search public posts or collect profiles, lists, threads, replies, quotes, retweeters, and favoriters
+**Actor:** [`xquik/x-tweet-scraper`](https://apify.com/xquik/x-tweet-scraper)
+**Actor ID:** `wAusCMrm284Voaw86`
+**Pricing:** Check the live Actor listing
+**Verification:** Public listing and live input schema checked; no billable run performed
+
+#### Xquik X Follower Scraper
+
+**Use Case:** Collect public followers, following, verified followers, list members, community members, or audience overlap
+**Actor:** [`xquik/x-follower-scraper`](https://apify.com/xquik/x-follower-scraper)
+**Actor ID:** `AaT0BcKU5GQh97wdt`
+**Pricing:** Check the live Actor listing
+**Verification:** Public listing and live input schema checked; no billable run performed
 
 ---
 
